@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" rel="stylesheet"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Edit Widget Image</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-xs-9">
+            <div class="navbar-text pull-left">
+                <a href="widget-list.html">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+
+
+            <a class="navbar-brand" href="#">Widget Edit</a>
+        </div>
+
+
+        <div class="col-xs-3">
+
+            <div class="navbar-text pull-right">
+                <a href="widget-list.html">
+                    <span class="glyphicon glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div class="container" id="profile-form">
+
+
+    <label for="name">Name</label>
+    <input class="form-control" id="name" placeholder="Page Name">
+
+    <label for="description">Text</label>
+    <input class="form-control" id="description" placeholder="Enter Text"></input>
+
+
+    <label for="url">URL</label>
+    <input class="form-control" id="url" placeholder="https://i.kinja-img.com/gawker-media/image"></input>
+
+    <label for="width">Width</label>
+    <input class="form-control" id="width" placeholder="100%"></input>
+    <label for="fileupload">Upload</label>
+    <input class="form-control" id="file"></input>
+
+    <input type="file" name="fileupload" value="fileupload" id="fileupload">
+
+    <div id="web-new">
+
+    <a  class="btn btn-primary btn-block" href="widget-list.html">
+        Upload Image
+    </a>
+</div>
+
+
+
+    <div id="web-new">
+
+        <a  class="btn btn-danger btn-block" href="widget-list.html">
+            Delete
+        </a>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid ">
+        <div class="row navbar-text pull-right">
+            <div class="col-xs-12">
+                <a href="../user/profile.html">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

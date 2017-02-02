@@ -36,7 +36,7 @@ body {
 
 
 .navbar-default {
-    background-color: #66ccff;
+    background-color: #99ccff;
     border-color: #e7e7e7;
 
 
@@ -155,5 +155,25 @@ body {
 .navbar-default.navbar-fixed-bottom {
     border-top-color: #000;
 }
+#right-margin{
+    margin-right: 0px;
+}
+#padding{
+
+    margin-right: 20px;
 
 
+}
+#leftpad{
+    margin-left:10px;
+    text-decoration: none;
+}
+#header-col{
+    color:#000099;
+    font-weight: bold;
+
+}
+
+a:hover {
+    color: darkblue;
+}

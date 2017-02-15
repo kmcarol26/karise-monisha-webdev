@@ -3,7 +3,7 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 100px;
 }
 #profile-form{
     padding-top: 36px;
@@ -166,6 +166,10 @@ body {
 }
 #leftpad{
     margin-left:10px;
+    text-decoration: none;
+}
+#toppad{
+    padding-top:100px;
     text-decoration: none;
 }
 #header-col{

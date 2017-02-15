@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script
-            src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" rel="stylesheet"></script>
-    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title>Edit Widget Heading</title>
-</head>
-<body>
+
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="row container-fluid">
         <div class="col-xs-9">
             <div class="navbar-text pull-left">
-                <a href="widget-list.html">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
@@ -31,7 +17,7 @@
         <div class="col-xs-3">
 
                 <div class="navbar-text pull-right">
-                    <a href="widget-list.html">
+                    <a ng-click="model.updateWidget(model.widget)">
                         <span class="glyphicon glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -43,18 +29,27 @@
 
 
             <label for="name">Name</label>
-            <input class="form-control" id="name" placeholder="My Header">
+            <input ng-model="model.widget.name"
+                   class="form-control"
+                   id="name"
+                   placeholder="My Header">
 
             <label for="description">Text</label>
-            <input class="form-control" id="description" placeholder="GIZMODO"></input>
+            <input ng-model="model.widget.text"
+                   class="form-control"
+                   id="description"
+                   placeholder="GIZMODO"></input>
 
 
             <label for="size">Size</label>
-            <input class="form-control" id="size" placeholder="25"></input>
+            <input ng-model="model.widget.size"
+                   class="form-control"
+                   id="size"
+                   placeholder="25"></input>
 
             <div id="web-new">
 
-                <a  class="btn btn-danger btn-block" href="widget-list.html">
+                <a  class="btn btn-danger btn-block" ng-click="model.deleteWidget()">
                     Delete
                 </a>
             </div>
@@ -74,7 +69,3 @@
             </div>
         </nav>
 
-
-
-</body>
-</html>

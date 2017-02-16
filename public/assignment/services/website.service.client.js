@@ -31,7 +31,9 @@
 
         function createWebsite(userId,website) {
             website.developerId=userId;
-            website._id=(new Date()).getTime(); //dummy id
+            var id=(new Date()).getTime();
+            website._id= id.toString();//dummy id
+
             websites.push(website);
         }
 

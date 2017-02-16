@@ -36,7 +36,8 @@
 
         function createPage(websiteId,page) {
             page.websiteId=websiteId;
-            page._id=(new Date()).getTime(); //dummy id
+            var id=(new Date()).getTime();
+            page._id=id.toString(); //dummy id
             pages.push(page);
         }
 

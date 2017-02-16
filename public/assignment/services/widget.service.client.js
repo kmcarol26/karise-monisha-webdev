@@ -34,6 +34,9 @@
         this.updateWidget= updateWidget;
         this.deleteWidget= deleteWidget;
         this.setHeaderWidgetType=setHeaderWidgetType;
+        this.setHeaderWidgetType=setHeaderWidgetType;
+        this.setImageWidgetType=setImageWidgetType;
+        this.setYouTubeWidgetType=setYouTubeWidgetType;
         //api is a json map of the CRUD operations
         var api = {
             "findWidgetsByPageId": findWidgetsByPageId,
@@ -42,26 +45,49 @@
           "deleteWidget": deleteWidget,
             "updateWidget": updateWidget,
             "setHeaderWidgetType":setHeaderWidgetType,
+            "setImageWidgetType":setImageWidgetType,
+            "setYouTubeWidgetType":setYouTubeWidgetType,
             "createWidget": createWidget
 
         };
         return api;
 
-        function setHeaderWidgetType() {
-           var newHeader={ "_id": "123","name":" New Header", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "Enter Text here"};
-           newHeader._id=(new Date()).getTime();
+        function setImageWidgetType() {
+           var newImage={ "_id": "345","name":"New Image",  "widgetType": "IMAGE", "pageId": "321", "width": "100%","text": "Enter text here",
+               "url": "Enter URL"};
+           var id=(new Date()).getTime();
+           newImage._id=id.toString();
 
-           return newHeader;
+           return newImage;
 
         }
+
+        function setHeaderWidgetType() {
+            var newHeader={ "_id": "123","name":" New Header", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "Enter Text here"};
+            newHeader._id=(new Date()).getTime();
+
+            return newHeader;
+
+        }
+
+        function setYouTubeWidgetType() {
+            var newYouTubeWidget={"_id": "137","name":"New Video", "widgetType": "YOUTUBE", "pageId": "117", "width": "100%",
+                "url": "https://youtu.be/AM2Ivdi9c4E","text": "" };
+                newYouTubeWidget._id=(new Date()).getTime();
+
+            return newYouTubeWidget;
+
+        }
+
 
 
         function createWidget(pageId,widget) {
             widget.pageId=pageId;
 
             widgets.push(widget);
-            //return widget._id;
+            //return widget;
         }
+
 
         function deleteWidget(widgetId) {
             for (var u in widgets) {
@@ -69,13 +95,8 @@
                     widgets.splice(u,1);
                 }
             }}
-        function updateWebsite(websiteId,website) {
-            for (var u in websites) {
-                if (websites[u]._id == websiteId) {
-                    websites[u].name=website.name;
-                    websites[u].description=website.description;
-                }
-            }}
+
+
 
 
 

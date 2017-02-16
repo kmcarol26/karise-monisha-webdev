@@ -12,10 +12,11 @@
         var vm=this;
         vm.updateUser=updateUser;
         vm.deleteUser=deleteUser;
-        var userId=$routeParams['uid'];
+
 
         function init() {
-            var user = UserService.findUserById(userId);
+            vm.userId=$routeParams['uid'];
+            var user = UserService.findUserById(vm.userId);
             vm.user = user;
         }
         init();

@@ -15,14 +15,9 @@
 
         function init() {
 
-
         vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
 
     }init();
-        //assigning to vm makes the RHS available on the templates
-
-
-
 
     }
 

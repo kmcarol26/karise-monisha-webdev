@@ -23,6 +23,8 @@
 
         vm.doYouTrustUrl=doYouTrustUrl;
         vm.setHeaderWidgetType=setHeaderWidgetType;
+        vm.setImageWidgetType=setImageWidgetType;
+        vm.setYouTubeWidgetType=setYouTubeWidgetType;
        // vm.deleteWidget=deleteWidget;
         function init(){
            // vm.widget=WidgetService.findWidgetById(vm.widgetId);
@@ -41,6 +43,30 @@
 
             var pageId=vm.pageId;
             vm.widget=WidgetService.setHeaderWidgetType();
+            vm.widgetId=vm.widget._id;
+
+            WidgetService.createWidget(pageId,vm.widget);
+            //WidgetService.findWidgetById(vm.widgetId);
+
+            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widgetId);
+        }
+
+        function setImageWidgetType(){
+
+            var pageId=vm.pageId;
+            vm.widget=WidgetService.setImageWidgetType();
+            vm.widgetId=vm.widget._id;
+
+            WidgetService.createWidget(pageId,vm.widget);
+            //WidgetService.findWidgetById(vm.widgetId);
+
+            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widgetId);
+        }
+
+        function setYouTubeWidgetType(){
+
+            var pageId=vm.pageId;
+            vm.widget=WidgetService.setYouTubeWidgetType();
             vm.widgetId=vm.widget._id;
 
             WidgetService.createWidget(pageId,vm.widget);

@@ -8,6 +8,11 @@
         .config(configuration); //this config gets loaded at startup
     function configuration($routeProvider){ //routeProvider is provided by the ngroute
         $routeProvider
+            .when("/",{   //when u see a #/login,fetch the templateUr user/login
+                templateUrl: "views/user/templates/login.view.client.html",
+                controller: "LoginController", //Name of Controller is LoginCOntroller
+                controllerAs: "model" // Within the template, we can now refer to the controller as model
+            })
             .when("/login",{   //when u see a #/login,fetch the templateUr user/login
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "LoginController", //Name of Controller is LoginCOntroller

@@ -9,18 +9,15 @@
     function WebsiteEditController($routeParams,$location,WebsiteService) {
         //var vm=this;
         //assigning to vm makes the RHS available on the templates
-        var userId=$routeParams.uid;
-        var websiteId=$routeParams.wid;
-
-        //assigning to vm makes the RHS available on the templates
-
         var vm=this;
-        vm.userId=userId;
-        vm.websiteId=websiteId;
+        vm.userId=$routeParams.uid;
+        vm.websiteId=$routeParams.wid;
+
+
 
 
         function init(){
-            var websites=WebsiteService.findWebsitesByUser(userId);
+            var websites=WebsiteService.findWebsitesByUser(vm.userId);
             vm.websites=websites;
             vm.website=WebsiteService.findWebsiteById(vm.websiteId);
 

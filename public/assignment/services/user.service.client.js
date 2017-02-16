@@ -70,7 +70,11 @@
         function createUser(user) {
             //website.developerId=userId;
             //website._id=(new Date()).getTime(); //dummy id
+            var id=(new Date()).getTime();
+            user._id=id.toString();
             users.push(user);
+            return user._id;
+
         }
 
         function updateUser(userId, newUser) {

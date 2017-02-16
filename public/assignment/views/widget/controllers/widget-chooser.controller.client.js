@@ -2,34 +2,29 @@
  * Created by Monisha on 2/15/2017.
  */
 
-/**
- * Created by Monisha on 2/15/2017.
- */
 
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("WidgetChooserController",WidgetChooserController)
+        .controller("WidgetChooserController", WidgetChooserController)
 
-    function WidgetChooserController($sce,$routeParams,$location,WidgetService) {
+    function WidgetChooserController($sce, $routeParams, $location, WidgetService) {
 
-        var vm=this;
-        vm.userId=$routeParams.uid;
-        vm.pageId=$routeParams.pid;
-       // vm.widgetId=$routeParams.wgid;
-        vm.websiteId=$routeParams.wid;
+        var vm = this;
 
-        vm.widgets  =WidgetService.findWidgetsByPageId(vm.pageId);
+        vm.doYouTrustUrl = doYouTrustUrl;
+        vm.setHeaderWidgetType = setHeaderWidgetType;
+        vm.setImageWidgetType = setImageWidgetType;
+        vm.setYouTubeWidgetType = setYouTubeWidgetType;
 
-        vm.doYouTrustUrl=doYouTrustUrl;
-        vm.setHeaderWidgetType=setHeaderWidgetType;
-        vm.setImageWidgetType=setImageWidgetType;
-        vm.setYouTubeWidgetType=setYouTubeWidgetType;
-       // vm.deleteWidget=deleteWidget;
-        function init(){
-           // vm.widget=WidgetService.findWidgetById(vm.widgetId);
+        vm.userId = $routeParams.uid;
+        vm.pageId = $routeParams.pid;
+        // vm.widgetId=$routeParams.wgid;
+        vm.websiteId = $routeParams.wid;
 
-        }init();
+        vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+
+
 
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";
@@ -39,42 +34,41 @@
             return $sce.trustAsResourceUrl(baseUrl);
         }
 
-        function setHeaderWidgetType(){
+        function setHeaderWidgetType() {
 
-            var pageId=vm.pageId;
-            vm.widget=WidgetService.setHeaderWidgetType();
-            vm.widgetId=vm.widget._id;
+            var pageId = vm.pageId;
+            vm.widget = WidgetService.setHeaderWidgetType();
+            vm.widgetId = vm.widget._id;
 
-            WidgetService.createWidget(pageId,vm.widget);
-            //WidgetService.findWidgetById(vm.widgetId);
+            WidgetService.createWidget(pageId, vm.widget);
 
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widgetId);
+
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
         }
 
-        function setImageWidgetType(){
+        function setImageWidgetType() {
 
-            var pageId=vm.pageId;
-            vm.widget=WidgetService.setImageWidgetType();
-            vm.widgetId=vm.widget._id;
+            var pageId = vm.pageId;
+            vm.widget = WidgetService.setImageWidgetType();
+            vm.widgetId = vm.widget._id;
 
-            WidgetService.createWidget(pageId,vm.widget);
-            //WidgetService.findWidgetById(vm.widgetId);
+            WidgetService.createWidget(pageId, vm.widget);
 
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widgetId);
+
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
         }
 
-        function setYouTubeWidgetType(){
+        function setYouTubeWidgetType() {
 
-            var pageId=vm.pageId;
-            vm.widget=WidgetService.setYouTubeWidgetType();
-            vm.widgetId=vm.widget._id;
+            var pageId = vm.pageId;
+            vm.widget = WidgetService.setYouTubeWidgetType();
+            vm.widgetId = vm.widget._id;
 
-            WidgetService.createWidget(pageId,vm.widget);
-            //WidgetService.findWidgetById(vm.widgetId);
+            WidgetService.createWidget(pageId, vm.widget);
 
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widgetId);
+
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
         }
-
 
 
     }

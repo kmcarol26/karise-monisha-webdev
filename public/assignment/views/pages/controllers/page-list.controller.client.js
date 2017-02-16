@@ -1,12 +1,12 @@
 /**
  * Created by Monisha on 2/14/2017.
  */
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("PageListController",PageListController)
+        .controller("PageListController", PageListController)
 
-    function PageListController($routeParams,PageService) {
+    function PageListController($routeParams, PageService) {
         var vm = this;
 
         vm.userId = $routeParams.uid;
@@ -15,9 +15,11 @@
 
         function init() {
 
-        vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
 
-    }init();
+        }
+
+        init();
 
     }
 

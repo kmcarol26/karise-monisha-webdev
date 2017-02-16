@@ -2,31 +2,35 @@
  * Created by Monisha on 2/14/2017.
  */
 
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("PageNewController",PageNewController)
+        .controller("PageNewController", PageNewController)
 
-    function PageNewController($routeParams,$location,PageService) {
+    function PageNewController($routeParams, $location, PageService) {
         //var vm=this;
         //assigning to vm makes the RHS available on the templates
-        var vm=this;
-        vm.userId=$routeParams.uid;
-        vm.websiteId=$routeParams.wid;
-        vm.pageId=$routeParams.pid;
-
-        function init(){
-
-            vm.pages=PageService.findPageByWebsiteId(vm.websiteId);
-
-
-        }init();
+        var vm = this;
         //event handlers
-        vm.createPage=createPage;
-        function createPage(page){
-            PageService.createPage(vm.websiteId,page);
+        vm.createPage = createPage;
+
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+
+        function init() {
+
+            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+
+
+        }
+
+        init();
+
+        function createPage(page) {
+            PageService.createPage(vm.websiteId, page);
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
 
         }
 

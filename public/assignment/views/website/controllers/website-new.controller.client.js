@@ -1,36 +1,36 @@
 /**
  * Created by Monisha on 2/14/2017.
  */
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("WebsiteNewController",WebsiteNewController)
+        .controller("WebsiteNewController", WebsiteNewController)
 
-    function WebsiteNewController($routeParams,$location,WebsiteService) {
+    function WebsiteNewController($routeParams, $location, WebsiteService) {
         //var vm=this;
         //assigning to vm makes the RHS available on the templates
-        var userId=$routeParams.uid;
+        var userId = $routeParams.uid;
 
         //assigning to vm makes the RHS available on the templates
 
-        var vm=this;
-        vm.userId=userId;
+        var vm = this;
+        vm.userId = userId;
 
 
-        function init(){
-            var websites=WebsiteService.findWebsitesByUser(userId);
-            vm.websites=websites;
+        function init() {
+            var websites = WebsiteService.findWebsitesByUser(userId);
+            vm.websites = websites;
 
 
-        }init();
+        }
+
+        init();
         //event handlers
-        vm.createWebsite=createWebsite;
-        function createWebsite(website){
-            WebsiteService.createWebsite(userId,website);
+        vm.createWebsite = createWebsite;
+        function createWebsite(website) {
+            WebsiteService.createWebsite(userId, website);
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/"+vm.userId+"/website");
-
-
+            $location.url("/user/" + vm.userId + "/website");
 
 
         }

@@ -1,41 +1,44 @@
 /**
  * Created by Monisha on 2/14/2017.
  */
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("WebsiteEditController",WebsiteEditController)
+        .controller("WebsiteEditController", WebsiteEditController)
 
-    function WebsiteEditController($routeParams,$location,WebsiteService) {
+    function WebsiteEditController($routeParams, $location, WebsiteService) {
         //var vm=this;
         //assigning to vm makes the RHS available on the templates
-        var vm=this;
-        vm.userId=$routeParams.uid;
-        vm.websiteId=$routeParams.wid;
-
-
-
-
-        function init(){
-            var websites=WebsiteService.findWebsitesByUser(vm.userId);
-            vm.websites=websites;
-            vm.website=WebsiteService.findWebsiteById(vm.websiteId);
-
-
-        }init();
+        var vm = this;
         //event handlers
-        vm.deleteWebsite=deleteWebsite;
-        vm.updateWebsite=updateWebsite;
-        function deleteWebsite(){
-            WebsiteService.deleteWebsite(vm.websiteId);
-            //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/"+vm.userId+"/website");
+        vm.deleteWebsite = deleteWebsite;
+        vm.updateWebsite = updateWebsite;
+
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+
+
+        function init() {
+            var websites = WebsiteService.findWebsitesByUser(vm.userId);
+            vm.websites = websites;
+            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+
 
         }
-        function updateWebsite(website){
-            WebsiteService.updateWebsite(vm.websiteId,website);
+
+        init();
+
+        function deleteWebsite() {
+            WebsiteService.deleteWebsite(vm.websiteId);
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/"+vm.userId+"/website");
+            $location.url("/user/" + vm.userId + "/website");
+
+        }
+
+        function updateWebsite(website) {
+            WebsiteService.updateWebsite(vm.websiteId, website);
+            //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
+            $location.url("/user/" + vm.userId + "/website");
 
         }
 

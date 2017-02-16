@@ -12,13 +12,7 @@
             { "_id": "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Lorem" },
             { "_id": "678", "name": "Checkers", "developerId": "123", "description": "Lorem" },
             { "_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem" }
-    ];
-        this.findWebsitesByUser= findWebsitesByUser;
-        this.findWebsiteById= findWebsiteById;
-        this.createWebsite= createWebsite;
-        this.deleteWebsite= deleteWebsite;
-        this.updateWebsite= updateWebsite;
-        //api is a json map of the CRUD operations
+        ];
         var api = {
             "findWebsitesByUser": findWebsitesByUser,
             "findWebsiteById": findWebsiteById,
@@ -28,6 +22,14 @@
 
         };
         return api;
+
+        this.findWebsitesByUser= findWebsitesByUser;
+        this.findWebsiteById= findWebsiteById;
+        this.createWebsite= createWebsite;
+        this.deleteWebsite= deleteWebsite;
+        this.updateWebsite= updateWebsite;
+
+
 
         function createWebsite(userId,website) {
             website.developerId=userId;

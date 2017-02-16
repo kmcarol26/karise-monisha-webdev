@@ -4,28 +4,23 @@
 /**
  * Created by Monisha on 2/10/2017.
  */
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("RegisterController",registerController);
+        .controller("RegisterController", registerController);
 
-    function registerController($routeParams,$location,UserService){//$routeParams is a map of all the URL attributes
+    function registerController($routeParams, $location, UserService) {//$routeParams is a map of all the URL attributes
 
         //assigning to vm makes the RHS available on the templates
-        var vm=this;
-        vm.createUser=createUser;
+        var vm = this;
+        vm.createUser = createUser;
 
-        function createUser(newUser){
-            var userId=UserService.createUser(newUser);
-            $location.url("/user/"+userId);
+        function createUser(newUser) {
+            var userId = UserService.createUser(newUser);
+            $location.url("/user/" + userId);
 
 
         }
-
-
-
-
-
 
 
     }

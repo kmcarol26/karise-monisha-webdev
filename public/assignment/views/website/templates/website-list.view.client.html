@@ -18,19 +18,18 @@
     </div>
 </nav>
 
-<div class="container-fluid" id="web-new" >
+<div class="container-fluid" id="web-new">
 
     <div ng-repeat="website in model.websites" class="row" id="top-left-pad1">
 
         <a href="#!/user/{{model.userId}}/website/{{ website._id}}/page">
-        {{website.name}}
+            {{website.name}}
         </a>
         <a href="#!/user/{{website.developerId}}/website/{{website._id}}">
-                    <span class="glyphicon glyphicon-cog pull-right"id="padding"></span>
-                </a>
-            </div>
+            <span class="glyphicon glyphicon-cog pull-right" id="padding"></span>
+        </a>
     </div>
-
+</div>
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

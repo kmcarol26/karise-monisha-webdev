@@ -19,26 +19,49 @@
 
 
         function init() {
-            var websites = WebsiteService.findWebsitesByUser(vm.userId);
-            vm.websites = websites;
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            console.log(vm.websiteId);
+            var websites =  WebsiteService
+                .findWebsitesByUser(vm.userId)
+                .success(function(websites){
+                    vm.websites = websites;
+                   var website= WebsiteService
+                        .findWebsiteById(vm.websiteId)
+                        .success(function(website){
+                            console.log("in");
+                            vm.website=website;
+                        }
+
+                       );
+
+                   //console.log(vm.websites);
+                });
+
 
 
         }
 
         init();
 
-        function deleteWebsite() {
-            WebsiteService.deleteWebsite(vm.websiteId);
+        function deleteWebsite(website) {
+            vm.websites=WebsiteService
+                .deleteWebsite(vm.websiteId,website)
+                .success(function(){
+                    $location.url("/user/" + vm.userId + "/website");
+                                    })
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/" + vm.userId + "/website");
+
 
         }
 
         function updateWebsite(website) {
-            WebsiteService.updateWebsite(vm.websiteId, website);
+            vm.websites=WebsiteService
+                .updateWebsite(vm.websiteId, website)
+                .success(function(){
+                    $location.url("/user/" + vm.userId + "/website");
+
+                });
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/" + vm.userId + "/website");
+
 
         }
 

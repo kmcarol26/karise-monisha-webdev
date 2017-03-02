@@ -21,29 +21,43 @@
 
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            PageService
+                .findAllPagesForWebsite(vm.websiteId)
+                .success(function(pages){
+                    vm.pages=pages;
+                    var page=PageService
+                                .findPageById(vm.pageId)
+                                .success(function(page){
+                                    console.log("page");
+                                    vm.page=page;
+                                });
 
-            vm.page = PageService.findPageById(vm.pageId);
 
-
+                });
         }
+
 
         init();
 
         function deletePage() {
-            PageService.deletePage(vm.pageId);
+            vm.pages=PageService
+                .deletePage(vm.pageId)
+                .success(function(){
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                });
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+
 
         }
 
         function updatePage(page) {
-            PageService.updatePage(vm.pageId, page);
-            //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            vm.pages=PageService
+                        .updatePage(vm.pageId, page)
+                        .success(function () {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
 
-
-        }
+                        });
+                  }
 
 
     }

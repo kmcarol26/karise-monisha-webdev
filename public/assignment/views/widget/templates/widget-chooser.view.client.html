@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
@@ -17,7 +17,7 @@
 
     <div class="row" id="web-new">
         <div class="col-xs-11">
-            <div ng-click="model.setHeaderWidgetType(model.pageId)">
+            <div ng-click="model.createWidget('HEADER')">
                 <a id="t-dec">
                     Header
                 </a>
@@ -30,7 +30,7 @@
     <div class="row">
 
         <div class="col-xs-11" id="web-new">
-            <div ng-click="model.setImageWidgetType(model.pageId)">
+            <div ng-click="model.createWidget('IMAGE')">
                 <a id="t-dec">
                     Image
                 </a>
@@ -41,7 +41,7 @@
     <div class="row">
 
         <div class="col-xs-11" id="web-new">
-            <div ng-click="model.setYouTubeWidgetType(model.pageId)">
+            <div ng-click="model.createWidget('YOUTUBE')">
                 <a id="t-dec">
                     YouTube
                 </a>
@@ -56,7 +56,7 @@
     <div class="container-fluid ">
         <div class="row navbar-text pull-right">
             <div class="col-xs-12">
-                <a href="#!/user/{{model.userId}}">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user pull-right"></span>
                 </a>
             </div>

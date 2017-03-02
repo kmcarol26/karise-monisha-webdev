@@ -18,18 +18,20 @@
         //Event Handlers Definitions
 
         function login(user) {
-            var user = UserService.findUserByCredentials(user.username, user.password); //UserService returns a user or null
-            if (user) {// if User exists and is not null
-                $location.url("/user/" + user._id);     //Go to profile page i.e change the URL using $location.url
+            var promise = UserService.findUserByCredentials(user.username, user.password); //UserService returns a user or null
+           // console.log(user);
+            promise.success(function (user){
+                if (user) {// if User exists and is not null
+                    $location.url("/user/" + user._id);     //Go to profile page i.e change the URL using $location.url
 
-            }
-            else {
-                vm.error = "User not found";
-            }
+                }
+                else {
+                    vm.error = "User not found";
+                }
+
+            });
+
         }
-
-
     }
-
 
 })();

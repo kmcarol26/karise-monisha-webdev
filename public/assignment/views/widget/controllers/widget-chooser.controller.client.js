@@ -13,19 +13,41 @@
         var vm = this;
 
         vm.doYouTrustUrl = doYouTrustUrl;
-        vm.setHeaderWidgetType = setHeaderWidgetType;
-        vm.setImageWidgetType = setImageWidgetType;
-        vm.setYouTubeWidgetType = setYouTubeWidgetType;
+        vm.createWidget = createWidget;
+
 
         vm.userId = $routeParams.uid;
         vm.pageId = $routeParams.pid;
         // vm.widgetId=$routeParams.wgid;
         vm.websiteId = $routeParams.wid;
 
-        vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+        function init() {
+            WidgetService
+                .findAllWidgetsForPage(vm.pageId)
+                .success(function(widgets){
+                    vm.widgets=widgets;
+
+        } )}init();
+        function createWidget(widgetType){
+            var newWidget = {};
+            newWidget._id = (new Date()).getTime();
+            newWidget.widgetType = widgetType;
+
+            var website=WidgetService
+                                 .createWidget(newWidget,vm.pageId)
+                                 .success(function(widget){
+                                     vm.widget=widget;
+
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widget._id);
+
+                                            });
+            //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
 
 
 
+
+
+        }
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";
             var urlParts = url.split('/');
@@ -33,6 +55,7 @@
             baseUrl += id;
             return $sce.trustAsResourceUrl(baseUrl);
         }
+        /*
 
         function setHeaderWidgetType() {
 
@@ -69,8 +92,7 @@
 
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
         }
-
-
+*/
     }
 
 

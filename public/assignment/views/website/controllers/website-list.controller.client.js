@@ -7,18 +7,20 @@
         .controller("WebsiteListController", WebsiteListController)
 
     function WebsiteListController($routeParams, WebsiteService) {
-
-        var userId = $routeParams.uid;
-        var websites = WebsiteService.findWebsitesByUser(userId);
-        //assigning to vm makes the RHS available on the templates
-
-
-        var website = WebsiteService.updateWebsite()
-
         var vm = this;
+        var userId = $routeParams.uid;
         vm.userId = userId;
-        vm.websites = websites;
-        // vm.website=WebsiteService.findWebsiteById()
+
+        function init(){
+
+            WebsiteService
+                .findWebsitesByUser(userId)
+                .success(function(websites){
+                    vm.websites = websites;
+                });
+
+        }init();
+       var website = WebsiteService.updateWebsite();
 
 
     }

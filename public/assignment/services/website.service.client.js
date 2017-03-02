@@ -5,7 +5,7 @@
     angular.module("WebAppMaker")
         .service("WebsiteService",websiteService); //declates service UserService. userService is the constructor . UserService returns api
 
-    function websiteService() {
+    function websiteService($http) {
         var websites = [{ "_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem" },
             { "_id": "234", "name": "Tweeter", "developerId": "456", "description": "Lorem" },
             { "_id": "456", "name": "Gizmodo", "developerId": "456", "description": "Lorem" },
@@ -13,6 +13,7 @@
             { "_id": "678", "name": "Checkers", "developerId": "123", "description": "Lorem" },
             { "_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem" }
         ];
+
         var api = {
             "findWebsitesByUser": findWebsitesByUser,
             "findWebsiteById": findWebsiteById,
@@ -32,47 +33,31 @@
 
 
         function createWebsite(userId,website) {
-            website.developerId=userId;
-            var id=(new Date()).getTime();
-            website._id= id.toString();//dummy id
 
-            websites.push(website);
+            return $http.post("/api/user/"+userId+"/website", website);
+
         }
 
-        function deleteWebsite(websiteId) {
-            for (var u in websites) {
-                if (websites[u]._id == websiteId) {
-                    websites.splice(u,1);
-                }
-        }}
+        function deleteWebsite(websiteId,website) {
+            return $http.delete("/api/website/"+websiteId, website);
+        }
         function updateWebsite(websiteId,website) {
-            for (var u in websites) {
-                if (websites[u]._id == websiteId) {
-                    websites[u].name=website.name;
-                    websites[u].description=website.description;
-                }
-            }}
+
+            return $http.put("/api/website/"+websiteId, website);
+
+        }
 
 
 
         function findWebsitesByUser(userId) {
-            var sites=[];
-            for (var u in websites) {
-                if (websites[u].developerId == userId) {
-                    sites.push(websites[u]);
-                }
-            }
-            return sites;
+          return $http.get("/api/user/"+userId+"/website");
         }
         function findWebsiteById(websiteId) {
-            for (var u in websites) {
-                var website=websites[u]
-                if (website._id === websiteId) {
-                    return angular.copy(website);//returning a copy of the website so that when we edit the website
-                                                // in website-edit , the website name on the left doesnt change
-                }
-            }
-            return null;
+            console.log("client");
+            return $http.get("/api/website/"+websiteId);
+
+/*
+            */
         }
     }
 })();

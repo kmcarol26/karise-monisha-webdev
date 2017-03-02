@@ -15,21 +15,23 @@
 
         var vm = this;
         vm.userId = userId;
-
-
-        function init() {
-            var websites = WebsiteService.findWebsitesByUser(userId);
-            vm.websites = websites;
-
-
-        }
-
-        init();
         //event handlers
         vm.createWebsite = createWebsite;
-        function createWebsite(website) {
-            WebsiteService.createWebsite(userId, website);
+        function init(){
+            WebsiteService
+                .findWebsitesByUser(userId)
+                .success(function(websites){
+                    vm.websites = websites;
+                });
+
+        }init();
+
+
+        function createWebsite(website,userId) {
+            var website=WebsiteService.
+                createWebsite(userId, website);
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
+
             $location.url("/user/" + vm.userId + "/website");
 
 

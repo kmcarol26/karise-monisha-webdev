@@ -8,221 +8,53 @@
     angular.module("WebAppMaker")
             .service("WidgetService", widgetService); //declates service UserService. userService is the constructor . UserService returns api
 
-    function widgetService() {
+    function widgetService($http) {
 
-        var widgets = [
-            {
-                "_id": "123",
-                "name": "My First Header",
-                "widgetType": "HEADER",
-                "pageId": "321",
-                "size": 2,
-                "text": "GIZMODO"
-            },
-            {
-                "_id": "234",
-                "name": "My Second Header",
-                "widgetType": "HEADER",
-                "pageId": "321",
-                "size": 4,
-                "text": "Lorem ipsum"
-            },
-            {
-                "_id": "345",
-                "name": "My First Image",
-                "widgetType": "IMAGE",
-                "pageId": "321",
-                "width": "100%",
-                "text": "Lorem ipsum",
-                "url": "http://lorempixel.com/400/200/"
-            },
-            {"_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-            {
-                "_id": "567",
-                "name": "My Third Header",
-                "widgetType": "HEADER",
-                "pageId": "321",
-                "size": 4,
-                "text": "Lorem ipsum"
-            },
-            {
-                "_id": "678", "name": "My First Video", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E", "text": "Lorem ipsum"
-            },
-            {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-            {
-                "_id": "135",
-                "name": "My Fourth Header",
-                "widgetType": "HEADER",
-                "pageId": "777",
-                "size": 2,
-                "text": "GIZMODO"
-            },
-            {
-                "_id": "136",
-                "name": "My First Image",
-                "widgetType": "IMAGE",
-                "pageId": "777",
-                "width": "100%",
-                "text": "Lorem ipsum",
-                "url": "http://lorempixel.com/400/200/"
-            },
-            {
-                "_id": "137", "name": "My First Video", "widgetType": "YOUTUBE", "pageId": "777", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E", "text": "Lorem ipsum"
-            }
 
-        ];
 
         var api = {
-            "findWidgetsByPageId": findWidgetsByPageId,
+            "findAllWidgetsForPage": findAllWidgetsForPage,
             "findWidgetById": findWidgetById,
-
             "deleteWidget": deleteWidget,
             "updateWidget": updateWidget,
-            "setHeaderWidgetType": setHeaderWidgetType,
-            "setImageWidgetType": setImageWidgetType,
-            "setYouTubeWidgetType": setYouTubeWidgetType,
             "createWidget": createWidget
 
         };
         return api;
 
-        this.findWidgetsByPageId = findWidgetsByPageId;
+        this.findAllWidgetsForPage = findAllWidgetsForPage;
         this.findWidgetById = findWidgetById;
         this.createWidget = createWidget;
         this.updateWidget = updateWidget;
         this.deleteWidget = deleteWidget;
-        this.setHeaderWidgetType = setHeaderWidgetType;
-        this.setHeaderWidgetType = setHeaderWidgetType;
-        this.setImageWidgetType = setImageWidgetType;
-        this.setYouTubeWidgetType = setYouTubeWidgetType;
 
+        function createWidget(widget,pageId) {
 
+            return $http.post("/api/page/"+pageId+"/widget",widget);
 
-
-        function setImageWidgetType() {
-            var newImage = {
-                "_id": "345",
-                "name": "New Image",
-                "widgetType": "IMAGE",
-                "pageId": "321",
-                "width": "100%",
-                "text": "Enter text here",
-                "url": "http://lorempixel.com/400/200/"
-            };
-            var id = (new Date()).getTime();
-            newImage._id = id.toString();
-
-            return newImage;
-
-        }
-
-        function setHeaderWidgetType() {
-            var newHeader = {
-                "_id": "123",
-                "name": " New Header",
-                "widgetType": "HEADER",
-                "pageId": "321",
-                "size": 2,
-                "text": "Enter Text here"
-            };
-            newHeader._id = (new Date()).getTime();
-
-            return newHeader;
-
-        }
-
-        function setYouTubeWidgetType() {
-            var newYouTubeWidget = {
-                "_id": "137", "name": "New Video", "widgetType": "YOUTUBE", "pageId": "117", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E", "text": ""
-            };
-            newYouTubeWidget._id = (new Date()).getTime();
-
-            return newYouTubeWidget;
-
-        }
-
-
-        function createWidget(pageId, widget) {
-            widget.pageId = pageId;
-
-            widgets.push(widget);
-            //return widget;
         }
 
 
         function deleteWidget(widgetId) {
-            for (var u in widgets) {
-                if (widgets[u]._id == widgetId) {
-                    widgets.splice(u, 1);
-                }
-            }
+
+            return $http.delete("/api/widget/"+widgetId);
+
         }
 
 
-        function findWidgetsByPageId(pageId) {
+        function findAllWidgetsForPage(pageId) {
 
-            var widgetList = [];
-            for (var u in widgets) {
-                if (widgets[u].pageId == pageId) {
-                    widgetList.push(widgets[u]);
-                }
-            }
-            return widgetList;
-            // return widgets;
+            return $http.get("/api/page/"+pageId+"/widget");
+
 
         }
 
         function findWidgetById(widgetId) {
-            for (var u in widgets) {
-                var widget = widgets[u];
-                if (widget._id == widgetId) {
-                    return angular.copy(widget);//returning a copy of the website so that when we edit the website
-                    // in website-edit , the website name on the left doesnt change
-                }
-            }
-
+            return $http.get("/api/widget/"+widgetId);
         }
 
         function updateWidget(widgetId, widget) {
-
-            if (widget.widgetType == "HEADER") {
-                for (var u in widgets) {
-                    if (widgets[u]._id == widgetId) {
-                        widgets[u].name = widget.name;
-                        widgets[u].text = widget.text;
-                        widgets[u].size = widget.size;
-                    }
-                }
-            }
-            else if (widget.widgetType == "IMAGE") {
-                for (var u in widgets) {
-                    if (widgets[u]._id == widgetId) {
-                        widgets[u].name = widget.name;
-                        widgets[u].text = widget.text;
-                        widgets[u].url = widget.url;
-                        widgets[u].width = widget.width;
-                    }
-                }
-
-            }
-            else //widgetType==YouTube
-
-            {
-                for (var u in widgets) {
-                    if (widgets[u]._id == widgetId) {
-                        widgets[u].name = widget.name;
-                        widgets[u].text = widget.text;
-                        widgets[u].url = widget.url;
-                        widgets[u].width = widget.width;
-                    }
-                }
-
-
-            }
-
+             return $http.put("/api/widget/"+widgetId,widget);
 
         }
     }

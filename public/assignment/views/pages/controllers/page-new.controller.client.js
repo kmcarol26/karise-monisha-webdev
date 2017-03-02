@@ -19,18 +19,33 @@
         vm.pageId = $routeParams.pid;
 
         function init() {
+           // console.log("page new client")
 
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            PageService
+                .findAllPagesForWebsite(vm.websiteId)
+                .success(function(pages){
+                    vm.pages=pages;
 
 
-        }
+                });
 
-        init();
+        }init();
 
         function createPage(page) {
-            PageService.createPage(vm.websiteId, page);
-            //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+           // console.log(page);
+            PageService
+                .createPage(vm.websiteId, page)
+                .success(function(){
+                    PageService
+                        .findAllPagesForWebsite(vm.websiteId)
+                        .success(function(pages){
+                            vm.pages=pages;
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+
+                        });
+
+                });
+
 
         }
 

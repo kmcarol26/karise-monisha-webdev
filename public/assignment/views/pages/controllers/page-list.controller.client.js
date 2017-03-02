@@ -14,12 +14,22 @@
         vm.pageId = $routeParams.pid;
 
         function init() {
+            console.log("pagelist");
 
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+                PageService
+                        .findAllPagesForWebsite(vm.websiteId)
+                        .success(function(pages){
+                            vm.pages=pages;
+                            console.log("inside");
+
+                }).error(function () {
+                    console.log("error");
+                });
 
         }
 
         init();
+        var website = PageService.updatePage();
 
     }
 

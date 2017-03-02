@@ -10,7 +10,19 @@
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
-        vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+        function init() {
+                        WidgetService
+                            .findAllWidgetsForPage(vm.pageId)
+                            .success(function(widgets){
+                    vm.widgets=widgets;
+                    console.log("inside widget controller");
+                                console.log(vm.widgets);
+
+            $('#widget-list')
+                .sortable({
+                    axis:"y"
+                });
+        });} init();
 
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";

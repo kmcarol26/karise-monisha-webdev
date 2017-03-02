@@ -6,7 +6,11 @@
     angular
         .module("WebAppMaker")    //We have just one argument which means we are just reading and not declaring WebAppMaker here
         .config(configuration); //this config gets loaded at startup
-    function configuration($routeProvider) { //routeProvider is provided by the ngroute
+    function configuration($routeProvider, $httpProvider) { //routeProvider is provided by the ngroute
+
+       $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+       $httpProvider.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+
         $routeProvider
             .when("/", {   //when u see a #/login,fetch the templateUr user/login
                 templateUrl: "views/user/templates/login.view.client.html",

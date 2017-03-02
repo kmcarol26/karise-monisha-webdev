@@ -11,17 +11,18 @@
         vm.pageId = $routeParams.pid;
 
         function init() {
+            console.log("hi");
                         WidgetService
                             .findAllWidgetsForPage(vm.pageId)
                             .success(function(widgets){
                     vm.widgets=widgets;
                     console.log("inside widget controller");
                                 console.log(vm.widgets);
-
+            /*
             $('#widget-list')
                 .sortable({
                     axis:"y"
-                });
+                });*/
         });} init();
 
         function doYouTrustUrl(url) {

@@ -10,8 +10,6 @@
 
     function widgetService($http) {
 
-
-
         var api = {
             "findAllWidgetsForPage": findAllWidgetsForPage,
             "findWidgetById": findWidgetById,
@@ -29,33 +27,19 @@
         this.deleteWidget = deleteWidget;
 
         function createWidget(widget,pageId) {
-
             return $http.post("/api/page/"+pageId+"/widget",widget);
-
         }
-
-
         function deleteWidget(widgetId) {
-
             return $http.delete("/api/widget/"+widgetId);
-
         }
-
-
         function findAllWidgetsForPage(pageId) {
-
             return $http.get("/api/page/"+pageId+"/widget");
-
-
         }
-
         function findWidgetById(widgetId) {
             return $http.get("/api/widget/"+widgetId);
         }
-
         function updateWidget(widgetId, widget) {
              return $http.put("/api/widget/"+widgetId,widget);
-
         }
     }
 })();

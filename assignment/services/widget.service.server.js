@@ -10,9 +10,6 @@ module.exports =  function (app) {
     app.get('/api/widget/:widgetId',findWidgetById);
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
-   // app.post ("/api/upload", upload.single('myFile'), uploadImage);
-
-
 
 
     var widgets = [
@@ -79,18 +76,27 @@ module.exports =  function (app) {
 
     ];
 
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
+
     function uploadImage(req, res) {
+        var myFile = req.file;
 
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
-        var myFile        = req.file;
+        console.log(req.body);
+        var filename = myFile.filename;
+        for (var w in widgets) {
+            if (widgets[w]._id == req.body.widgetId) {
+                console.log("if");
+                widgets[w].url = req.protocol + '://' + req.get('host') + "/uploads/" + filename;
+                widgets[w].width=req.body.width;
+            }
+        }
 
-        var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
+        console.log(widgets);
+        res.redirect("/assignment/#/user/" + req.body.userId + "/website/" + req.body.websiteId + "/page/"
+            + req.body.pageId + "/widget");
     }
 
     function deleteWidget(req,res) {
@@ -98,24 +104,18 @@ module.exports =  function (app) {
         var widgetId=req.params.widgetId;
          for (var u in widgets) {
          if (widgets[u]._id == widgetId) {
-         widgets.splice(u, 1);
-         console.log(widgets);
+            widgets.splice(u, 1);
+                  }
          }
-         }
-
         res.json(widgets);
     }
 
     function findWidgetById(req,res) {
-        console.log("server");
-        var widgetId=req.params.widgetId;
-
-
+         var widgetId=req.params.widgetId;
          for (var u in widgets) {
          var widget = widgets[u];
          if (widget._id == widgetId) {
-             console.log(widget);
-            return res.json(widget);//returning a copy of the website so that when we edit the website
+             return res.json(widget);//returning a copy of the website so that when we edit the website
          // in website-edit , the website name on the left doesnt change
          }
          }
@@ -125,11 +125,8 @@ module.exports =  function (app) {
     function createWidget(req,res) {
         var pageId=req.params.pageId;
         var newWidget=req.body;
-
-
-         newWidget.pageId = pageId;
-
-         widgets.push(newWidget);
+        newWidget.pageId = pageId;
+        widgets.push(newWidget);
         res.json(newWidget);
 
     }
@@ -140,8 +137,7 @@ module.exports =  function (app) {
         for (var u in widgets) {
             if (widgets[u].pageId == pageId) {
                 widgetList.push(widgets[u]);
-                //console.log(pages[u]);
-            }
+                           }
         }
         res.json(widgetList);
 
@@ -149,47 +145,41 @@ module.exports =  function (app) {
     function updateWidget(req, res) {
 
          var widget=req.body;
-
          if (widget.widgetType == "HEADER") {
-         for (var u in widgets) {
-         if (widgets[u]._id == widget._id) {
-         widgets[u].name =  widget.name;
-         widgets[u].text = widget.text;
-         widgets[u].size = Number(widget.size);
+                for (var u in widgets) {
+                    if (widgets[u]._id == widget._id) {
+                         widgets[u].name =  widget.name;
+                         widgets[u].text = widget.text;
+                         widgets[u].size = Number(widget.size);
+                    }
+                }
          }
-         }
-         }
+
          else if (widget.widgetType == "IMAGE") {
-         for (var u in widgets) {
-         if (widgets[u]._id == widget._id) {
-         widgets[u].name = widget.name;
-         widgets[u].text = widget.text;
-         widgets[u].url = widget.url;
-         widgets[u].width = widget.width;
-         }
-         }
+                for (var u in widgets) {
+                    if (widgets[u]._id == widget._id) {
+                        widgets[u].name = widget.name;
+                        widgets[u].text = widget.text;
+                        widgets[u].url = widget.url;
+                        widgets[u].width = widget.width;
+                    }
+                }
 
          }
          else //widgetType==YouTube
 
          {
-         for (var u in widgets) {
-         if (widgets[u]._id == widget._id) {
-         widgets[u].name = widget.name;
-         widgets[u].text = widget.text;
-         widgets[u].url = widget.url;
-         widgets[u].width = widget.width;
-         }
-         }
-
+                for (var u in widgets) {
+                    if (widgets[u]._id == widget._id) {
+                        widgets[u].name = widget.name;
+                        widgets[u].text = widget.text;
+                        widgets[u].url = widget.url;
+                        widgets[u].width = widget.width;
+                    }
+                }
 
          }
          res.json(widget);
-
-
     }
-
-
-
 
 }

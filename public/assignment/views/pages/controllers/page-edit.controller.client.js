@@ -1,7 +1,6 @@
 /**
  * Created by Monisha on 2/14/2017.
  */
-
 (function () {
     angular
         .module("WebAppMaker")
@@ -24,44 +23,32 @@
             PageService
                 .findAllPagesForWebsite(vm.websiteId)
                 .success(function(pages){
-                    vm.pages=pages;
-                    var page=PageService
-                                .findPageById(vm.pageId)
-                                .success(function(page){
-                                    console.log("page");
-                                    vm.page=page;
-                                });
-
-
+                            vm.pages=pages;
+                            var page=PageService
+                                        .findPageById(vm.pageId)
+                                        .success(function(page){
+                                                    vm.page=page;
+                                                });
                 });
-        }
-
-
-        init();
+        } init();
 
         function deletePage() {
             vm.pages=PageService
-                .deletePage(vm.pageId)
-                .success(function(){
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                });
-            //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
-
-
+                        .deletePage(vm.pageId)
+                        .success(function(){
+                                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                                 });
         }
 
         function updatePage(page) {
             vm.pages=PageService
                         .updatePage(vm.pageId, page)
                         .success(function () {
-                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
 
-                        });
+                                });
                   }
-
-
     }
-
 
 })();
 

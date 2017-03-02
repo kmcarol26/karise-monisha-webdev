@@ -8,49 +8,35 @@
         .controller("PageNewController", PageNewController)
 
     function PageNewController($routeParams, $location, PageService) {
-        //var vm=this;
-        //assigning to vm makes the RHS available on the templates
+
         var vm = this;
         //event handlers
         vm.createPage = createPage;
-
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
         function init() {
-           // console.log("page new client")
-
-            PageService
+             PageService
                 .findAllPagesForWebsite(vm.websiteId)
                 .success(function(pages){
-                    vm.pages=pages;
-
-
-                });
-
+                            vm.pages=pages;
+                        });
         }init();
 
         function createPage(page) {
-           // console.log(page);
             PageService
                 .createPage(vm.websiteId, page)
                 .success(function(){
-                    PageService
-                        .findAllPagesForWebsite(vm.websiteId)
-                        .success(function(pages){
-                            vm.pages=pages;
-                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                            PageService
+                                .findAllPagesForWebsite(vm.websiteId)
+                                .success(function(pages){
+                                            vm.pages=pages;
+                                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                                        });
 
-                        });
-
-                });
-
-
+                            });
         }
-
-
     }
-
 
 })();

@@ -13,16 +13,14 @@
     ];
 
      function createUser(req,res){
-         console.log("inside server");
          var newUser = req.body;
          newUser._id = (new Date()).getTime() + "";
          users.push(newUser);
-         console.log(newUser);
          return res.json(newUser);
      }
 
     function findUser(req,res){
-        console.log("username");
+
         var username= req.query.username;
         var password= req.query.password;
         if(username && password){
@@ -34,7 +32,7 @@
     }
 
     function findUserByUsername(req,res){
-        console.log("inside username");
+
         var username=req.query['username'];
         var user= users.find(
             function(u){

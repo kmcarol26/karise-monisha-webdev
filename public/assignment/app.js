@@ -3,7 +3,9 @@
  */
 (function () {
     angular
-        .module("WebAppMaker", ["ngRoute"]); //Declare module WebAppMaker.ngRoute is declared in the angular-route. Now, ngRoute is added as
+        .module("WebAppMaker", ["ngRoute","wbdvDirectives"]);
+        //angular
+      //  .module('wbdvDirectives',[]); //Declare module WebAppMaker.ngRoute is declared in the angular-route. Now, ngRoute is added as
                                              //a dependency i.e WebAppMaker can now use ngRoute (similar to importing)
 
 })();

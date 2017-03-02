@@ -30,34 +30,20 @@
         this.deleteWebsite= deleteWebsite;
         this.updateWebsite= updateWebsite;
 
-
-
         function createWebsite(userId,website) {
-
             return $http.post("/api/user/"+userId+"/website", website);
-
         }
-
         function deleteWebsite(websiteId,website) {
             return $http.delete("/api/website/"+websiteId, website);
         }
         function updateWebsite(websiteId,website) {
-
             return $http.put("/api/website/"+websiteId, website);
-
         }
-
-
-
         function findWebsitesByUser(userId) {
-          return $http.get("/api/user/"+userId+"/website");
+            return $http.get("/api/user/"+userId+"/website");
         }
         function findWebsiteById(websiteId) {
-            console.log("client");
             return $http.get("/api/website/"+websiteId);
-
-/*
-            */
         }
     }
 })();

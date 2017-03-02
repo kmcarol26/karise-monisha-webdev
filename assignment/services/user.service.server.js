@@ -40,9 +40,11 @@
             });
 
         if(user){
+
             res.send(user);
         }
         else{
+            console("hihi");
            res.sendStatus(404);
         }
 

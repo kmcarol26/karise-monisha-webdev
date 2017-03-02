@@ -11,8 +11,9 @@ body {
 #web-new{
     padding-top: 20px;
 
-
-
+}
+.bottom-pad{
+    padding-bottom: 60px;
 }
 #t-dec{
     text-decoration: none;

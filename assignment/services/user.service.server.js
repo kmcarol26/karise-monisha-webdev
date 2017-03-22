@@ -1,22 +1,27 @@
- module.exports = function(app){
+ module.exports = function(app, model){
+
      app.get("/api/user",findUser);
      app.get("/api/user/:userId",findUserById);
      app.put("/api/user/:userId",updateUser);
      app.delete("/api/user/:userId",deleteUser);
      app.post("/api/user",createUser);
 
-    var users = [
-        {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder",email:"alice@gmail.com"},
-        {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley",email:"alice@gmail.com"},
-        {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia",email:"alice@gmail.com"},
-        {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi",email:"alice@gmail.com"}
-    ];
-
      function createUser(req,res){
-         var newUser = req.body;
-         newUser._id = (new Date()).getTime() + "";
-         users.push(newUser);
-         return res.json(newUser);
+         var user = req.body;
+
+         console.log("client server creeate");
+         model
+             .userModel
+             .createUser(user)
+             .then(
+                 function(newUser){
+                     res.json(newUser);
+                 },
+                 function(error){
+                     res.sendStatus(400).send(error);
+                 }
+             );
+
      }
 
     function findUser(req,res){
@@ -27,26 +32,30 @@
             findUserByCredentials(req,res);
         }
         else if(username){
-            findUserByUsername(req,res);
+            findUserByUsername(username,res);
         }
     }
 
-    function findUserByUsername(req,res){
+    function findUserByUsername(username,res){
 
-        var username=req.query['username'];
-        var user= users.find(
-            function(u){
-                return u.username == username;
-            });
+        //var username=req.query['username'];
 
-        if(user){
+        model.userModel.findUserByUsername(username)
+            .then(
+                function (user,err){
+                    if(user) {
+                        console.log("SERVER");
+                        res.json(user);
 
-            res.send(user);
-        }
-        else{
+                    }
+                    else{
+                        console.log("else ");
+                        res.sendStatus(400).send(err);
+                    }
+                    
+                }
 
-           res.sendStatus(404);
-        }
+            );
 
     }
 
@@ -55,24 +64,54 @@
     function findUserByCredentials(req, res){
         var username= req.query.username;
         var password= req.query.password;
-        var user= users.find(function(user){
-            return user.password == password && user.username ==  username
-        });
-        res.send(user);
-    }
+        model.userModel.findUserByCredentials(username,password)
+            .then(
+                function(users,error){
+                    if(users){
+                        res.json(users);
+                    }
+                    else{
+                        res.sendStatus(400).send(error);
+                    }
+                }
+
+            );
+
+        }
 
 
     function findUserById(req, res){
         var userId=req.params.userId;
-        var user=users.find(function (u) {
-            return u._id == userId;
-        });
-        res.json(user); //If you know you are sending json use json function to send the object
+        console.log("find user by id server");
+        model
+            .userModel
+            .findUserById(userId)
+            .then(
+                function(user){
+                    console.log(user);
+
+                        res.json(user);
+                    },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function updateUser(req,res){
         var userId=req.params.userId;
         var newUser= req.body;
+        model.userModel.updateUser(userId,newUser)
+            .then(
+                function () {
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+        /*
         for (var u in users) {
 
             if (users[u]._id == userId) {
@@ -82,22 +121,26 @@
                 return; //to stop at first match
             }
         }
-        return null;
+        return null;*/
 
     }
      function deleteUser(req,res){
          var userId=req.params.userId;
          var newUser= req.body;
-         for (var u in users) {
 
-             if (users[u]._id == userId) {
-                 users.splice(u,1);
-                 res.sendStatus(200);
-                 return; //to stop at first match
-             }
-         }
-         return res.sendStatus(404); ///couldnt find user so couldnt splice
+         model.userModel.deleteUser(userId,newUser)
+             .then(
+                 function(){
+                     res.send(200);
+
+         },
+                 function(){
+                     res.sendStatus(400).send(error);
+                 }
+             );
+
 
      }
+
  }
 

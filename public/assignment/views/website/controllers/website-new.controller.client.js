@@ -30,7 +30,8 @@
         function createWebsite(website,userId) {
             var website=WebsiteService.
                 createWebsite(userId, website);
-            //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
+            vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
+            console.log(vm.websites);
 
             $location.url("/user/" + vm.userId + "/website");
 

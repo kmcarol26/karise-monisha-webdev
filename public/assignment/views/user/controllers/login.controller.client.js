@@ -19,17 +19,16 @@
 
         function login(user) {
             var promise = UserService.findUserByCredentials(user.username, user.password); //UserService returns a user or null
-           // console.log(user);
+           console.log("login");
             promise.success(function (user){
-                if (user) {// if User exists and is not null
+
+                    console.log("success");
                     $location.url("/user/" + user._id);     //Go to profile page i.e change the URL using $location.url
 
-                }
-                else {
-                    vm.error = "User not found";
-                }
-
+                }).error(function(){
+                vm.error = "User not found";
             });
+
 
         }
     }

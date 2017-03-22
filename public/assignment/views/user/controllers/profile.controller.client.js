@@ -53,6 +53,7 @@
                     . deleteUser(user._id)
                     .success(function(){
                         $location.url("/login");
+                        //vm.message = "User removed";
                     })
                     .error(function(){
                         vm.error = "Unable to remove user";

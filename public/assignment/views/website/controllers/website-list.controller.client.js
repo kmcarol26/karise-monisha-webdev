@@ -16,11 +16,14 @@
             WebsiteService
                 .findWebsitesByUser(userId)
                 .success(function(websites){
+
                     vm.websites = websites;
+                    console.log("hi");
+                    console.log(vm.websites);
                 });
 
         }init();
-       var website = WebsiteService.updateWebsite();
+       //var website = WebsiteService.updateWebsite();
 
 
     }

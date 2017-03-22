@@ -18,12 +18,12 @@
     </div>
 </nav>
 
-<div class="container-fluid">
+<div wam-sortable wam-callback="model.reorderWidget(start, end) | orderBy: 'order'" style="overflow: visible" class="container-fluid" >
 
-    <div id="widget-list"  wbdv-sortable="">
-        <div ng-repeat="widget in model.widgets">
+    <!--<div id="widget-list"   -->
+        <div  ng-repeat="widget in model.widgets">
             {{model.widget}}
-            <div ng-switch="widget.widgetType">
+            <div ng-switch="widget.type">
                 <div class="jga-toolbar">
 
                     <a id="t-dec"
@@ -52,6 +52,21 @@
                             allowfullscreen></iframe>
                     <!--  {{widget.width}}-->
                 </div>
+                <div ng-switch-when="HTML" ng-bind-html="model.doYouTrustHtml(widget.text)">
+                </div>
+
+                <div ng-switch-when="INPUT">
+                    <div ng-if="widget.formatted" text-angular ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        [                       'ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        [                       'indent','outdent'],['html']]" ng-model="widget.text"></div>
+                    <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                           placeholder="{{widget.placeholder}}" class="form-control"/>
+                    <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                              rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                              class="form-control">{{widget.text}}</textarea>
+                </div>
+
+            </div>
 
             </div>
             <div class="bottom-pad"></div>
@@ -59,7 +74,7 @@
         </div>
     </div>
 
-</div>
+
 
 
 

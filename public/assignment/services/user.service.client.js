@@ -22,9 +22,11 @@
             return $http.put("/api/user/"+userId, newUser);
         }
         function findUserById(userId) {
+            console.log("find user by id client server");
             return $http.get("/api/user/"+userId);
         }
         function findUserByCredentials(username, password) {
+            console.log("client servicce");
             return $http.get("/api/user?username="+username+"&password="+password);
         }
         function createUser(user) {

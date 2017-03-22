@@ -15,7 +15,8 @@
             "findWidgetById": findWidgetById,
             "deleteWidget": deleteWidget,
             "updateWidget": updateWidget,
-            "createWidget": createWidget
+            "createWidget": createWidget,
+            "reorderWidget" : reorderWidget
 
         };
         return api;
@@ -25,8 +26,10 @@
         this.createWidget = createWidget;
         this.updateWidget = updateWidget;
         this.deleteWidget = deleteWidget;
+        this.reorderWidget = reorderWidget;
 
         function createWidget(widget,pageId) {
+            console.log("in create widget client");
             return $http.post("/api/page/"+pageId+"/widget",widget);
         }
         function deleteWidget(widgetId) {
@@ -39,7 +42,12 @@
             return $http.get("/api/widget/"+widgetId);
         }
         function updateWidget(widgetId, widget) {
+            console.log("in update widget client");
              return $http.put("/api/widget/"+widgetId,widget);
+        }
+        function reorderWidget(pageId, start, end) {
+            console.log("in reorder widget client");
+            return $http.put("/page/"+pageId+"/widget?start="+start+"&end="+end);
         }
     }
 })();

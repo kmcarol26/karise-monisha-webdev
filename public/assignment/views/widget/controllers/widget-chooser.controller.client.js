@@ -30,13 +30,15 @@
         } )}init();
         function createWidget(widgetType){
             var newWidget = {};
-            newWidget._id = (new Date()).getTime();
-            newWidget.widgetType = widgetType;
+            //newWidget._id = (new Date()).getTime();
+            newWidget.type = widgetType;
 
-            var website=WidgetService
+                    WidgetService
                                  .createWidget(newWidget,vm.pageId)
                                  .success(function(widget){
                                      vm.widget=widget;
+                                     console.log("controller back")
+                                      console.log(vm.widget);
 
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widget._id);
 
@@ -55,44 +57,7 @@
             baseUrl += id;
             return $sce.trustAsResourceUrl(baseUrl);
         }
-        /*
 
-        function setHeaderWidgetType() {
-
-            var pageId = vm.pageId;
-            vm.widget = WidgetService.setHeaderWidgetType();
-            vm.widgetId = vm.widget._id;
-
-            WidgetService.createWidget(pageId, vm.widget);
-
-
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
-        }
-
-        function setImageWidgetType() {
-
-            var pageId = vm.pageId;
-            vm.widget = WidgetService.setImageWidgetType();
-            vm.widgetId = vm.widget._id;
-
-            WidgetService.createWidget(pageId, vm.widget);
-
-
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
-        }
-
-        function setYouTubeWidgetType() {
-
-            var pageId = vm.pageId;
-            vm.widget = WidgetService.setYouTubeWidgetType();
-            vm.widgetId = vm.widget._id;
-
-            WidgetService.createWidget(pageId, vm.widget);
-
-
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
-        }
-*/
     }
 
 

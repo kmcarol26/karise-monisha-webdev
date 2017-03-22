@@ -22,10 +22,13 @@
        // vm.widgets = WidgetService.findAllWidgetsForPage(vm.pageId);
 
         function init() {
+            console.log("inside edit controller");
+
 
                     WidgetService
                             .findWidgetById(vm.widgetId)
                             .success(function(widget){
+                                console.log(widget);
                                 vm.widget = widget;
                             });
 
@@ -48,6 +51,7 @@
             WidgetService
                 .updateWidget(vm.widgetId, widget)
                 .success(function(widget){
+                    console.log(widget);
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                 });
 

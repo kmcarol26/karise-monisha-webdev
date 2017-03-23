@@ -137,10 +137,10 @@ module.exports =  function (app,model) {
         model
             .widgetModel
             .updateWidget(widgetType,widget)
-            .then(function(){
+            .then(function(widget){
                 console.log("update");
                   //  console.log(widget);
-                    res.sendStatus(200);
+                    res.send(widget);
                 },
                 function(error){
                 console.log(error);

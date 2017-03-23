@@ -17,8 +17,9 @@
         function init() {
             vm.userId = $routeParams['uid'];
             var promise = UserService.findUserById(vm.userId);
-            promise.success(function(user){
-                vm.user = user;
+            promise.then(function(user){
+                if(user){
+                vm.user = user;}
             });
 
         }
@@ -28,7 +29,7 @@
         function updateUser(newUser) {
             UserService
                 .updateUser(vm.userId, newUser)
-                .success(function(user){
+                .then(function(user){
                     if (user != null) {
 
                         vm.message = "User successfully updated!"
@@ -51,11 +52,10 @@
             if(answer) {
                 UserService
                     . deleteUser(user._id)
-                    .success(function(){
+                    .then(function(){
                         $location.url("/login");
                         //vm.message = "User removed";
-                    })
-                    .error(function(){
+                    },function(){
                         vm.error = "Unable to remove user";
                     });
             }

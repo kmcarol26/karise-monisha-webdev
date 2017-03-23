@@ -24,7 +24,7 @@
         function init() {
             WidgetService
                 .findAllWidgetsForPage(vm.pageId)
-                .success(function(widgets){
+                .then(function(widgets){
                     vm.widgets=widgets;
 
         } )}init();
@@ -35,7 +35,7 @@
 
                     WidgetService
                                  .createWidget(newWidget,vm.pageId)
-                                 .success(function(widget){
+                                 .then(function(widget){
                                      vm.widget=widget;
                                      console.log("controller back")
                                       console.log(vm.widget);

@@ -60,7 +60,8 @@ module.exports = function(app,model){
             .pageModel
             .createPage(websiteId,page)
             .then(function(page){
-                res.json(page);
+                res.json(model.pageModel.addWidget(page._id));
+               // res.json(page);
             }, function (err) {
                 res.sendStatus(400).send(err);
             });

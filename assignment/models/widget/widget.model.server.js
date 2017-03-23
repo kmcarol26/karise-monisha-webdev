@@ -29,6 +29,10 @@ module.exports = function() {
                         console.log("right place");
                         console.log(start);
 
+                        //page.widgets.splice(end,0,widgets.splice(start,1)[0])
+                        //page.save(function(
+                        //pave.markModified('widget')
+
                         if(start< end){
                             if(widget.order === start){
                                 console.log(widget.order);
@@ -113,6 +117,7 @@ module.exports = function() {
     }
     function updateWidget(type,widget) {
         console.log("in widget model update");
+        console.log(widget);
         if(widget.type==="HEADER") {
             return widgetModel
                 .update(
@@ -138,7 +143,6 @@ module.exports = function() {
         }
 
         else if(widget.type==="IMAGE") {
-            console.log("4");
             return widgetModel
                 .update(
                     {

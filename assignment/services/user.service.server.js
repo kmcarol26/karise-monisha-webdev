@@ -15,6 +15,8 @@
              .createUser(user)
              .then(
                  function(newUser){
+                     console.log("success");
+                     console.log(newUser);
                      res.json(newUser);
                  },
                  function(error){
@@ -82,6 +84,7 @@
 
     function findUserById(req, res){
         var userId=req.params.userId;
+        console.log(userId);
         console.log("find user by id server");
         model
             .userModel

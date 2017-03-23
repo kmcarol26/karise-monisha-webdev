@@ -25,22 +25,37 @@
         //api is a json map of the CRUD operations
 
         function createPage(websiteId, page) {
-            return $http.post("/api/website/"+websiteId+"/page",page);
+            return $http.post("/api/website/"+websiteId+"/page",page)
+                .then(function(response){
+                    return response.data;
+                });
         }
         function deletePage(pageId) {
-            return $http.delete("/api/page/"+pageId);
+            return $http.delete("/api/page/"+pageId)
+                .then(function(response){
+                    return response.data;
+                });
         }
         function updatePage(pageId, page) {
-            return $http.put("/api/page/"+pageId,page);
+            return $http.put("/api/page/"+pageId,page)
+                .then(function(response){
+                    return response.data;
+                });
         }
         function findAllPagesForWebsite(websiteId) {
 
-            return $http.get("/api/website/"+websiteId+"/page");
+            return $http.get("/api/website/"+websiteId+"/page")
+                .then(function(response){
+                    return response.data;
+                });
 
         }
 
         function findPageById(pageId) {
-            return $http.get("/api/page/"+pageId);
+            return $http.get("/api/page/"+pageId)
+                .then(function(response){
+                    return response.data;
+                });
         }
     }
 })();

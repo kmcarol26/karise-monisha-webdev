@@ -15,7 +15,7 @@
             console.log("hi");
                         WidgetService
                             .findAllWidgetsForPage(vm.pageId)
-                            .success(function(widgets){
+                            .then(function(widgets){
                     vm.widgets=widgets;
                     //console.log(vm.widgets);
                     console.log("inside widget controller");

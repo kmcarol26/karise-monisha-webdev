@@ -22,11 +22,11 @@
             console.log(vm.websiteId);
             var websites =  WebsiteService
                 .findWebsitesByUser(vm.userId)
-                .success(function(websites){
+                .then(function(websites){
                     vm.websites = websites;
                    var website= WebsiteService
                         .findWebsiteById(vm.websiteId)
-                        .success(function(website){
+                        .then(function(website){
                             console.log("in");
                             vm.website=website;
                         }
@@ -45,7 +45,7 @@
         function deleteWebsite(website) {
             vm.websites=WebsiteService
                 .deleteWebsite(vm.websiteId,website)
-                .success(function(){
+                .then(function(){
                     $location.url("/user/" + vm.userId + "/website");
                                     })
             //vm.websites=WebsiteService.findWebsitesByUser(vm.userId);
@@ -56,7 +56,7 @@
         function updateWebsite(website) {
             vm.websites=WebsiteService
                 .updateWebsite(vm.websiteId, website)
-                .success(function(){
+                .then(function(){
                     $location.url("/user/" + vm.userId + "/website");
 
                 });

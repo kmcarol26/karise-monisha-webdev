@@ -17,36 +17,38 @@
 
         function createUser(newUser) {
             console.log("createUser");
+            console.log("newUser");
             UserService
                         .createUser(newUser)
-                        .success(function(user){
+                        .then(function(user){
                             console.log("createUser");
                             var userId=user._id;
 
-                        }).error(function(){console.log("error");});
+                        },function(err){console.log(err);});
 
         }
 
         function register(user) {
             //noinspection JSUnresolvedFunction
+            console.log("regi contr");
+
             UserService
                 .findUserByUsername(user.username)
-                .success(function(user){
+                .then(function(user){
                     vm.message= " Username already taken";
-                })
-                .error(function(){
+                },function(){
                     UserService
                         .createUser(user)
-                        .success(function (user){
+                        .then(function (user){
                             console.log(user);
                             var userId=user._id;
                             $location.url("/user/" +userId);
                            // $location.url('/profile/' +user._id);
 
-                        })
-                        .error(function(){
-                            vm.error = "Sorry ! Could not Register";
-                        });
+                        },function(){
+                        vm.error = "Sorry ! Could not Register";
+                    });
+
 
             });
         }

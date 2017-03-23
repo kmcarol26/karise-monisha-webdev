@@ -27,7 +27,7 @@
 
                     WidgetService
                             .findWidgetById(vm.widgetId)
-                            .success(function(widget){
+                            .then(function(widget){
                                 console.log(widget);
                                 vm.widget = widget;
                             });
@@ -50,7 +50,7 @@
 
             WidgetService
                 .updateWidget(vm.widgetId, widget)
-                .success(function(widget){
+                .then(function(widget){
                     console.log(widget);
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                 });
@@ -61,7 +61,7 @@
 
             vm.widgets=WidgetService
                 .deleteWidget(vm.widgetId)
-                .success(function(){
+                .then(function(){
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                 });
 

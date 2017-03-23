@@ -29,8 +29,8 @@ module.exports =  function (app,model) {
         model.widgetModel
             .reorderWidget( start, end, pageId)
             .then(
-                function (stats) {
-                    res.sendStatus(200);
+                function (widget) {
+                    res.send(widget);
                 },
                 function (error) {
                     res.sendStatus(400);
@@ -130,6 +130,9 @@ module.exports =  function (app,model) {
     function updateWidget(req, res) {
 
         var widget=req.body;
+
+        console.log("MONSIHA");
+        console.log(widget);
         var widgetType=widget.type;
         model
             .widgetModel

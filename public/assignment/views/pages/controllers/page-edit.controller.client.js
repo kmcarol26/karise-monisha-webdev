@@ -22,11 +22,11 @@
         function init() {
             PageService
                 .findAllPagesForWebsite(vm.websiteId)
-                .success(function(pages){
+                .then(function(pages){
                             vm.pages=pages;
                             var page=PageService
                                         .findPageById(vm.pageId)
-                                        .success(function(page){
+                                        .then(function(page){
                                                     vm.page=page;
                                                 });
                 });
@@ -35,7 +35,7 @@
         function deletePage() {
             vm.pages=PageService
                         .deletePage(vm.pageId)
-                        .success(function(){
+                        .then(function(){
                                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
                                  });
         }
@@ -43,7 +43,7 @@
         function updatePage(page) {
             vm.pages=PageService
                         .updatePage(vm.pageId, page)
-                        .success(function () {
+                        .then(function () {
                                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
 
                                 });

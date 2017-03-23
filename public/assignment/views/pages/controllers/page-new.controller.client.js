@@ -19,7 +19,7 @@
         function init() {
              PageService
                 .findAllPagesForWebsite(vm.websiteId)
-                .success(function(pages){
+                .then(function(pages){
                             vm.pages=pages;
                         });
         }init();
@@ -27,10 +27,10 @@
         function createPage(page) {
             PageService
                 .createPage(vm.websiteId, page)
-                .success(function(){
+                .then(function(){
                             PageService
                                 .findAllPagesForWebsite(vm.websiteId)
-                                .success(function(pages){
+                                .then(function(pages){
                                             vm.pages=pages;
                                             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
                                         });

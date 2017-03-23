@@ -4,17 +4,42 @@
 (function () {
     angular
         .module('wbdvDirectives',[])
-        .directive('wbdvSortable', sortableDir );
+        .directive('wbdvSortable', wbdvSortable );
 
-    function sortableDir() {
-        function linkFunc(scope, element, attributes) {
+    function wbdvSortable($routeParams) {
+        var pageId= $routeParams['pid'];
+        console.log("in directives");
 
-            element.sortable({axis: 'y'});
+        function linker(scope, element, attributes) {
+
+            var start = -1;
+            var end = -1;
+            element.sortable(
+                {axis: 'y'},
+                { start: function (event, ui) {
+                    start = ui.item.index();
+                    console.log(start);
+                },
+                    stop: function(event, ui){
+                        end = ui.item.index();
+                        scope.sortController.reorderWidget(start,end,pageId);
+                    }});
         }
-        return {
-            link: linkFunc
+        return{
+            scope: {
+            },
+            link: linker,
+            controller:sortController,
+            controllerAs:'sortController'
         };
+
     }
 
-
+    function sortController(WidgetService){
+        var vm=this;
+        vm.reorderWidget=reorderWidget ;
+        function reorderWidget(start,end,pageId){
+            WidgetService.reorderWidget(start,end,pageId);
+        }
+    }
 })();

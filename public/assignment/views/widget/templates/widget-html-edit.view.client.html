@@ -1,40 +1,32 @@
-<nav class="navbar navbar-default navbar-fixed-top" >
-    <div class="container-fluid row">
-        <div class="col-sm-4 hidden-xs">
-            <div class="navbar-text pull-left" style="margin-left: 0px;">
-                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-xs-9">
+            <div class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
-            <div class="navbar-text pull-right" style="margin-right: 0px;">
-                <a href="#">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </div>
-            <div class="navbar-header">
-                <a class="navbar-brand pull-left" href="#">
-                    HTML-widget
-                </a>
-            </div>
+
+
+            <a id="header-col" class="navbar-brand" href="#">Widget Edit</a>
         </div>
 
-        <div class="col-xs-12 col-sm-8">
-            <div class="navbar-header">
-                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
-                    <span class="glyphicon glyphicon-chevron-left navbar-text pull-left hidden-lg hidden-md hidden-sm">
-                    </span>
 
-                </a>
-                <a class="navbar-brand pull-left" href="#">
-                    Edit Widget
-                </a>
+        <div class="col-xs-3">
+
+            <div class="navbar-text pull-right">
                 <a ng-click="model.updateWidget(model.widget)">
-                    <span class="glyphicon  glyphicon-ok navbar-text pull-right"></span>
+                    <span class="glyphicon glyphicon glyphicon-ok"></span>
                 </a>
             </div>
+
         </div>
     </div>
-</nav><div class="container">
+</nav>
+<div class="container" id="profile-form">
+    <div class="form-group">
+        <label for="Name" class="control-label">Name</label>
+        <input ng-model="model.widget.name" type="text" class="form-control"  placeholder="Name"/>
 
     <div ng-model="model.widget.text"
          text-angular
@@ -43,6 +35,7 @@
         ['indent','outdent'],['html']]">
 
     </div>
+    <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()">Delete</a>
 
 
 </div>
@@ -52,17 +45,16 @@
 
 
 
-
-
 <nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="col-xs-12">
-
-            <a href="#/user/{{model.uid}}">
-                <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
-            </a>
-
+    <div class="container-fluid ">
+        <div class="row navbar-text pull-right">
+            <div class="col-xs-12">
+                <a href="#/user/{{model.userId}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
 
         </div>
     </div>
 </nav>
+

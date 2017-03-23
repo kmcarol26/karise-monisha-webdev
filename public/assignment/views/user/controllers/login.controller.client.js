@@ -20,12 +20,12 @@
         function login(user) {
             var promise = UserService.findUserByCredentials(user.username, user.password); //UserService returns a user or null
            console.log("login");
-            promise.success(function (user){
+            promise.then(function (user){
 
                     console.log("success");
                     $location.url("/user/" + user._id);     //Go to profile page i.e change the URL using $location.url
 
-                }).error(function(){
+                },function(){
                 vm.error = "User not found";
             });
 

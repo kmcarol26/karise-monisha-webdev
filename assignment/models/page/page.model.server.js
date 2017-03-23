@@ -13,9 +13,37 @@ module.exports = function(){
         "createPage": createPage,
         "deletePage": deletePage,
         "updatePage": updatePage,
-        "setModel": setModel
+        "setModel": setModel,
+        "addWidget" : addWidget,
+        "reorderWidgets": reorderWidgets
     };return api;
 
+    function reorderWidgets(){
+        var deferred = q.defer();
+        page.widgets.splice(end,0,widgets.splice(start,1)[0]);
+        page.save(function(page,err){
+            if(page){
+                deferred.resolve(page);
+            }
+            else{
+                deferred.reject(err);
+            }
+        });
+      //  pave.markModified('widget');
+
+    }
+
+    function addWidget(pageId){
+        var deferred = q.defer();
+        PageModel
+            .findById(pageId, function (err, page) {
+                page.widgets.push(pageId);
+                page.save();
+                deferred.resolve(page);
+            });
+        return deferred.promise;
+
+    }
     function setModel(_model) {
         model=_model;
     }

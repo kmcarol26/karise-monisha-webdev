@@ -31,19 +31,34 @@
         this.updateWebsite= updateWebsite;
 
         function createWebsite(userId,website) {
-            return $http.post("/api/user/"+userId+"/website", website);
+            return $http.post("/api/user/"+userId+"/website", website)
+                .then(function(response){
+                    return response.data;
+                });
         }
         function deleteWebsite(websiteId,website) {
-            return $http.delete("/api/website/"+websiteId, website);
+            return $http.delete("/api/website/"+websiteId, website)
+                .then(function(response){
+                    return response.data;
+                });
         }
         function updateWebsite(websiteId,website) {
-            return $http.put("/api/website/"+websiteId, website);
+            return $http.put("/api/website/"+websiteId, website)
+                .then(function(response){
+                    return response.data;
+                });
         }
         function findWebsitesByUser(userId) {
-            return $http.get("/api/user/"+userId+"/website");
+            return $http.get("/api/user/"+userId+"/website")
+                .then(function(response){
+                    return response.data;
+                });
         }
         function findWebsiteById(websiteId) {
-            return $http.get("/api/website/"+websiteId);
+            return $http.get("/api/website/"+websiteId)
+                .then(function(response){
+                    return response.data;
+                });
         }
     }
 })();
